@@ -8,32 +8,24 @@ Adapting traditional knowledge base completion models to encode opinions.
 
 ## Main Files
 
-`transE.py`
-
-Model definitions
+**transE.py** -- model definitions
 - `TransE`: baseline model, implementation of [Bordes et al, 2013](https://www.utc.fr/~bordesan/dokuwiki/_media/en/transe_nips13.pdf)
 - `TransE_SourceFull`: (Deviation Model) extension of TransE with additional srouce-specific deviation vectors for each entity and relation
 - `TransE_SourceMatrix`: (Matrix Model) extension of TransE with a source-specifi matrix transormation applied to each entity and relation vector
 
-**train.py**
-
-Train baseline model. Usage:
+**train.py** -- train baseline model. Usage:
 ```
 python3 train.py --data data/yelp --name yelp_baseline --num_epochs 10 --validation_step 10 --embedding_dim 100 --patience 3 --norm 2 --optim sgd --learning_rate 0.0005 --margin 0.5 --val_pkl /data0/mashabelyi/TransE/val_dict.pkl
 ```
 
 
-**train_sourceModel.py**
-
-Train baseline model. Usage:
+**train_sourceModel.py** -- train source deviation model. Usage:
 ```
 python3 train_sourceModel.py --data data/yelp --name yelp_deviation --num_epochs 10 --validation_step 10 --embedding_dim 100 --patience 3 --norm 2 --optim sgd --learning_rate 0.0005 --margin 0.5 --val_pkl /data0/mashabelyi/TransE/val_dict.pkl
 ```
 
 
-**train_sourceMatrix.py**
-
-Train baseline model. Usage:
+**train_sourceMatrix.py** -- Train source matrix model. Usage:
 ```
 python3 train_sourceMatrix.py --data data/yelp --name yelp_matrix --num_epochs 10 --validation_step 10 --embedding_dim 100 --patience 3 --norm 2 --optim sgd --learning_rate 0.0005 --margin 0.5 --val_pkl /data0/mashabelyi/TransE/val_dict.pkl
 ```
@@ -66,7 +58,7 @@ python3 train_sourceMatrix.py --data data/yelp --name yelp_matrix --num_epochs 1
 
 **embedding_dim**: dimensionality of entity and relation embeddings
 
-**--val_pkl**: path to a pre-generated pickle file for validation. Passing in this file speeds up evaluation at the end of training. Use a pre-generated file on Redwood at `/data0/mashabelyi/TransE/val_dict.pkl`
+**val_pkl**: path to a pre-generated pickle file for validation. Passing in this file speeds up evaluation at the end of training. Use a pre-generated file on Redwood at `/data0/mashabelyi/TransE/val_dict.pkl`
  
 ## Development Paramteres
 For development purposes, you may want to train and evaluate on a smaller subset of samples. To do this, use the following parameters to subset the train, validation, and test sets
