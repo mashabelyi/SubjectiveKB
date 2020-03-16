@@ -64,5 +64,7 @@ python3 train_sourceMatrix.py --data data/yelp --name yelp_matrix --num_epochs 1
 For development purposes, you may want to train and evaluate on a smaller subset of samples. To do this, use the following parameters to subset the train, validation, and test sets
 
 **debug_nTrain**: number of samples in training. e.g. `--debug_nTrain 100`
+
 **debug_nVal**: number of samples in validation. e.g. `--debug_nVal 100`
+
 **debug_nTest**: number of samples in testing. e.g. `--debug_nTest 100`
