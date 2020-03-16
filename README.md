@@ -15,7 +15,7 @@ Model definitions
 - `TransE_SourceFull`: (Deviation Model) extension of TransE with additional srouce-specific deviation vectors for each entity and relation
 - `TransE_SourceMatrix`: (Matrix Model) extension of TransE with a source-specifi matrix transormation applied to each entity and relation vector
 
-`train.py`
+**train.py**
 
 Train baseline model. Usage:
 ```
@@ -23,7 +23,7 @@ python3 train.py --data data/yelp --name yelp_baseline --num_epochs 10 --validat
 ```
 
 
-`train_sourceModel.py`
+**train_sourceModel.py**
 
 Train baseline model. Usage:
 ```
@@ -31,7 +31,7 @@ python3 train_sourceModel.py --data data/yelp --name yelp_deviation --num_epochs
 ```
 
 
-`train_sourceMatrix.py`
+**train_sourceMatrix.py**
 
 Train baseline model. Usage:
 ```
@@ -40,17 +40,32 @@ python3 train_sourceMatrix.py --data data/yelp --name yelp_matrix --num_epochs 1
 
 ## Parameters
 
+### Required
+
 **data**: path to data folder
+
 **name**: model name (or path), training scripts will create a directory with input name to store training log, model weights, evaluation results
+
+### Optional
+
 **batch_size**: batch size, default=128
+
 **margin**: margin used in loss function, default=1
+
 **norm**: norm used in loss function, default=2
+
 **patience**: flag to stop training if validation loss does not decrease in `patience` number of epochs
+
 **optin**: 'sgd' or 'adam', default='adam'
+
 **learning_rate**: optimizer learning rate, default=0.001
+
 **num_epochs**: max number of epochs to train
+
 **validation_step**: run evaluation on validation set every `validation_step` number of epochs. This can take a while, so set `validation_step` >= `num_epochs` to prevent any evaluation during training.
+
 **embedding_dim**: dimensionality of entity and relation embeddings
+
 **--val_pkl**: path to a pre-generated pickle file for validation. Passing in this file speeds up evaluation at the end of training. Use a pre-generated file on Redwood at `/data0/mashabelyi/TransE/val_dict.pkl`
  
 ## Development Paramteres
