@@ -1,4 +1,6 @@
-# Subjective TransE
+# Subjective KB
+
+Adapting traditional knowledge base completion models to encode opinions.
 
 ## Dependencies
 - python3
