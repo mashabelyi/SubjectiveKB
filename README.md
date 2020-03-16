@@ -48,7 +48,7 @@ python3 train_sourceMatrix.py --data data/yelp --name yelp_matrix --num_epochs 1
 
 **patience**: flag to stop training if validation loss does not decrease in `patience` number of epochs
 
-**optin**: 'sgd' or 'adam', default='adam'
+**optim**: 'sgd' or 'adam', default='adam'
 
 **learning_rate**: optimizer learning rate, default=0.001
 
@@ -60,7 +60,9 @@ python3 train_sourceMatrix.py --data data/yelp --name yelp_matrix --num_epochs 1
 
 **val_pkl**: path to a pre-generated pickle file for validation. Passing in this file speeds up evaluation at the end of training. Use a pre-generated file on Redwood at `/data0/mashabelyi/TransE/val_dict.pkl`
  
-## Development Paramteres
+### Development Paramteres
 For development purposes, you may want to train and evaluate on a smaller subset of samples. To do this, use the following parameters to subset the train, validation, and test sets
 
-**--debug_nTrain**: 
+**debug_nTrain**: number of samples in training. e.g. `--debug_nTrain 100`
+**debug_nVal**: number of samples in validation. e.g. `--debug_nVal 100`
+**debug_nTest**: number of samples in testing. e.g. `--debug_nTest 100`
