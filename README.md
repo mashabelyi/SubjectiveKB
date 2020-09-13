@@ -6,6 +6,15 @@ Adapting traditional knowledge base completion models to encode opinions.
 - python3
 - pytorch
 
+
+## Data
+Processed datasets are uploaded on [google drive](https://drive.google.com/drive/u/1/folders/1u9MOgsu5QnBzvSiMEYznOhrGVI9ggkpK)
+
+Data sources:
+- [YELP dataset](https://www.yelp.com/dataset) - filtered to include only restaurant reviews.
+- Suffrage newspaper dataset (on Redwood) - filtered to include articles from 18 newspapers between 1900-1920.
+- Climate change TV discourse
+
 ## Train Models
 
 The line below will initiate model training with specified parameters. Output files will be stored in `path/to/OUTPUT_FOLDER`.
@@ -61,13 +70,10 @@ For development purposes, you may want to train and evaluate on a smaller subset
 
 **debug_nTest**: number of samples in testing. e.g. `--debug_nTest 100`
 
-## Savio
 
-Starting a job on savio:
-```
-sbatch start_subjkb.job -m train-val -a hyte -n 1 -l 0.001 -r 0.5 -s 100 -d ../subjkb/data/yelp5_minie_0619/ -o /global/scratch/mashabelyi/subjkb/models/yelp5_minie_0619/hyte/yelp5 -c 0.001
-```
+### Relation Extraction
 
+The `relation_extraction` directory contains scripts used to extract (head, rel, tail) tuples from raw corpora.
 
-
+For extractino with MinIE use open source code: https://github.com/uma-pi1/minie
 
