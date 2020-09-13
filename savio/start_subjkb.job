@@ -1,0 +1,62 @@
+#!/bin/bash
+# Job name:
+#SBATCH --job-name=subjkb_tuning
+# dbamman faculty computing account
+#SBATCH --account=fc_dbamman
+# Partition:
+#SBATCH --partition=savio2_gpu
+#
+# Wall clock limit: (this runs for 48 hrs max)
+#SBATCH --time=48:00:00
+#SBATCH --output=/global/scratch/mashabelyi/subjkb/output/slurm_%j.out
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+#SBATCH --gres=gpu:1
+#
+# run multiple iterations of the same model
+#_ignore_SBATCH --array=0-1
+#
+# Set email notifications
+#_ignore_SBATCH --mail-user=mashabelyi@berkeley.edu
+#_ignore_SBATCH --mail-type=all
+#
+#
+# Usage
+# -m (mode) {train, val, train-val, test}
+# -a (architecture) {transE, subjD, subjM, ff, ffs}
+# -n (norm) {1,2}
+# -l (learning rate) float e.g. 0.0001
+# -r (maRgin) float e.g. 0.5
+# -s (size of embeddings) int e.g. 100
+# -d (data folder) string
+# -o (output name) string
+#
+while getopts m:a:n:l:r:s:d:o:c: option
+do
+case "${option}"
+in
+a) MODEL=${OPTARG};;
+m) MODE=${OPTARG};;
+n) NORM=${OPTARG};;
+l) LR=${OPTARG};;
+r) MARGIN=${OPTARG};;
+s) DIM=${OPTARG};;
+d) DATA=${OPTARG};;
+o) OUT=${OPTARG};;
+c) REG=${OPTARG};;
+esac
+done
+
+echo ${MODEL} ${MODE} ${NORM} ${LR} ${MARGIN} ${DIM} ${REG}
+
+
+source /global/home/users/mashabelyi/anaconda3/bin/activate /global/home/users/mashabelyi/anaconda3/envs/subjkb
+
+# python run.py --model ${MODEL} --mode ${MODE} --f --data /global/home/users/mashabelyi/subjkb/data/yelp2 --name /global/home/users/mashabelyi/subjkb/models/YELP2_transe_d100_m0.5_lr0.0001_n1 --num_epochs 200 --embedding_dim 100 --patience 10 --norm 1 --optim adam --learning_rate 0.0001 --margin 0.5
+python /global/home/users/mashabelyi/subjkb/src/run.py --model ${MODEL} --mode ${MODE} --f --data ${DATA} --name ${OUT}_${MODEL}_d${DIM}_m${MARGIN}_lr${LR}_n${NORM}_l2reg${REG} --num_epochs 200 --embedding_dim ${DIM} --patience 10 --norm ${NORM} --optim adam --learning_rate ${LR} --margin ${MARGIN} --l2reg ${REG}
+
+source /global/home/users/mashabelyi/anaconda3/bin/deactivate
+
+
+

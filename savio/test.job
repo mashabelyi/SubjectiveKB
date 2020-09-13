@@ -1,0 +1,24 @@
+#!/bin/bash
+# Job name:
+#SBATCH --job-name=savio_gpu_test
+# dbamman faculty computing account
+#SBATCH --account=fc_dbamman
+# Partition:
+#SBATCH --partition=savio2_gpu
+#
+# Wall clock limit: (this runs for 2 minutes max)
+#SBATCH --time=00:02:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+#SBATCH --gres=gpu:1
+#
+# Set email notifications
+#SBATCH --mail-user=mashabelyi@berkeley.edu
+#SBATCH --mail-type=all
+
+source anaconda3/bin/activate anaconda3/envs/subjkb
+
+python test.py
+
+source anaconda3/bin/deactivate
