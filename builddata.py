@@ -10,6 +10,7 @@ import numpy as np
 
 
 _UNK_ = 'UNK'
+_PAD_ = 'PAD'
 
 def load_triples(fpath):
 	"""
@@ -20,8 +21,11 @@ def load_triples(fpath):
 	data = []
 	with open(fpath, 'r') as f:
 		for line in f:
-			h,r,t,s = line.strip().split('\t')
-			data.append((h,r,t,s))
+			try:
+				h,r,t,s = line.strip().split('\t')
+				data.append((h,r,t,s))
+			except:
+				pass
 	return data
 
 
@@ -30,8 +34,8 @@ def vectorize(triples):
 	create relation and entity id lookup tables
 	"""
 
-	rel2id, ent2id, src2id = {_UNK_:1},{_UNK_:1},{_UNK_:1}
-	nRel, nEnt, nSrc = 1, 1, 1
+	rel2id, ent2id, src2id = {_PAD_:0, _UNK_:1}, {_PAD_:0, _UNK_:1}, {}
+	nRel, nEnt, nSrc = 1, 1, -1
 
 	for h,r,t,s in triples:
 			

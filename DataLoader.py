@@ -24,18 +24,19 @@ def load_triple_ids(fpath):
 			if len(data) == 1:
 				continue
 			h,t,r = data
-			res.append((int(h),int(r),int(t),1)) # append 1 for source for now to make it work with the rest of the code
+			# +1 for padding tokenid=0
+			res.append((int(h)+1,int(r)+1,int(t)+1,1)) # append 1 for source for now to make it work with the rest of the code
 	return res
 
 def load_ids(fpath):
-	res = {}
+	res = {'PAD':0} # model uses padding_idx=0
 	with open(fpath, 'r') as f:
 		for line in f:
 			data = line.strip().split()
 			if len(data) == 1:
 				continue
 			else:
-				res[data[0]] = int(data[1])
+				res[data[0]] = int(data[1])+1
 	return res
 
 def vectorize(triples):
